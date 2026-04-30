@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Studio</title>
+    <style>
+        /* Ümumi təmiz və qara dizayn */
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+        }
+
+        .container { text-align: center; width: 90%; max-width: 400px; }
+
+        /* Loqo dairəsi */
+        .logo-wrapper {
+            width: 110px; height: 110px; margin: 0 auto 25px;
+            border-radius: 50%; border: 1px solid #333;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; background: #000;
+        }
+        .logo-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Başlıq və Şüar nizamı */
+        h1 {
+            font-size: 1.4rem; font-weight: normal;
+            letter-spacing: 4px; text-transform: uppercase; margin: 10px 0;
+        }
+
+        .slogan {
+            font-size: 0.7rem; color: #888; letter-spacing: 1px;
+            margin-bottom: 45px; white-space: nowrap; text-transform: lowercase;
+        }
+
+        /* Düymələr */
+        .menu-list { display: flex; flex-direction: column; gap: 15px; }
+
+        .btn {
+            padding: 16px 0; border-radius: 50px; text-decoration: none;
+            font-size: 0.85rem; color: #fff; background: transparent;
+            border: 1px solid #333; transition: 0.3s; cursor: pointer;
+            text-transform: uppercase; font-weight: bold;
+        }
+
+        .btn:hover, .btn:active {
+            background-color: #fff; color: #000; border-color: #fff;
+        }
+
+        /* KATALOQ MODAL (Pəncərə) */
+        .modal {
+            display: none; position: fixed; z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            justify-content: center; align-items: center;
+        }
+
+        .modal-content {
+            background: #111; padding: 25px 15px; border-radius: 20px;
+            width: 85%; max-width: 320px; text-align: center; border: 1px solid #222;
+        }
+
+        .modal-header { font-size: 1rem; letter-spacing: 2px; margin-bottom: 20px; color: #fff; text-transform: uppercase; }
+
+        /* Sürüşən Şəkillər */
+        .slider {
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+            gap: 15px; padding-bottom: 10px; scrollbar-width: none;
+        }
+        .slider::-webkit-scrollbar { display: none; }
+
+        .slide-card {
+            scroll-snap-align: center; flex-shrink: 0;
+            width: 100%; display: flex; flex-direction: column; align-items: center;
+        }
+
+        .slide-card img {
+            width: 100%; height: 350px; object-fit: cover;
+            border-radius: 15px; border: 1px solid #333;
+        }
+
+        .cut-name { margin-top: 15px; font-size: 0.9rem; color: #aaa; letter-spacing: 1px; }
+
+        .close-btn {
+            margin-top: 20px; color: #555; font-size: 0.75rem;
+            cursor: pointer; background: none; border: none; text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- LOQO: Buraya öz şəklinin linkini yerləşdir -->
+        <div class="logo-wrapper">
+            <img src="https://i.postimg.cc/VvKs7hPr/logo.png" alt="Logo">
+        </div>
+
+        <h1>BARBER STUDİO</h1>
+        <div class="slogan">klassik təcrübə, modern üslub</div>
+
+        <div class="menu-list">
+            <!-- Kataloq Düyməsi -->
+            <div class="btn" onclick="openKataloq()">Kataloq</div>
+            
+            <!-- Əlaqə Düyməsi -->
+            <a href="https://wa.me/994517088834" target="_blank" class="btn">Əlaqə</a> 
+            
+            <!-- Ünvan Düyməsi -->
+            <a href="UNVAN_LINKI_BURAYA" class="btn">Ünvanlarımız</a>
+        </div>
+    </div>
+
+    <!-- KATALOQ PƏNCƏRƏSİ -->
+    <div id="kataloqModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">kataloq</div>
+            
+            <div class="slider">
+                <!-- Şəkil 1 -->
+                <div class="slide-card">
+                    <img src="https://i.postimg.cc/26rNWxLR/hair1.jpg" alt="Style 1">
+                    <div class="cut-name">Modern uzun kəsim</div>
+                </div>
+
+                <!-- Şəkil 2 -->
+                <div class="slide-card">
+                    <img src="https://i.postimg.cc/rwffjCPv/hair3.jpg" alt="Style 2">
+                    <div class="cut-name">Kölgəli kəsim</div>
+                </div>
+
+                <!-- Şəkil 3 -->
+                <div class="slide-card">
+                    <img src="https://i.postimg.cc/zGnSVwCB/8c1b435761c52461d66dd2c099c7bcae.jpg" alt="Style 3">
+                    <div class="cut-name">Buzz cut</div>
+                </div>
+				
+				<!-- Şəkil 4 -->
+                <div class="slide-card">
+                    <img src="https://i.postimg.cc/Y914t7Tn/316d070964cd8674c526d767d58c9823.jpg" alt="Style 3">
+                    <div class="cut-name">French crop </div>
+                </div>
+				
+            </div>
+
+            <button class="close-btn" onclick="closeKataloq()">Geri qayıtmaq üçün basın</button>
+        </div>
+    </div>
+
+    <script>
+        function openKataloq() {
+            document.getElementById("kataloqModal").style.display = "flex";
+        }
+        function closeKataloq() {
+            document.getElementById("kataloqModal").style.display = "none";
+        }
+        // Pəncərədən kənara basanda bağlansın
+        window.onclick = function(event) {
+            var modal = document.getElementById("kataloqModal");
+            if (event.target == modal) { modal.style.display = "none"; }
+        }
+    </script>
+
+</body>
+</html>
